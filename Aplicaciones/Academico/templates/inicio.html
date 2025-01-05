@@ -1,0 +1,153 @@
+{%extends "./plantilla.html"%}
+
+{%block contenido%}
+<style>
+    .carousel-inner img {
+        max-height: 650px; /* Ajusta la altura según lo que necesites */
+        object-fit: cover; /* Recorta la imagen para que encaje en las dimensiones */
+    }
+</style>
+
+<div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+        <img src="https://blog.up.edu.mx/hubfs/Doctorado%20en%20Ciencias%20Empresariales/Blog-%C2%BFCu%C3%A1l%20es%20la%20diferencia%20entre%20la%20investigaci%C3%B3n%20acad%C3%A9mica%20y%20la%20profesional_.png" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Encuestas Académicas</h5>
+            <p>Participa en encuestas educativas y ayuda a mejorar el aprendizaje de todos.</p>
+        </div>
+    </div>
+    <div class="carousel-item">
+        <img src="https://www.ceupe.com/images/easyblog_articles/4259/b2ap3_large_investigacion-academica.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Resultados en Tiempo Real</h5>
+            <p>Analiza y visualiza los resultados de las encuestas al instante para tomar decisiones informadas.</p>            
+        </div>
+    </div>
+    <div class="carousel-item">
+        <img src="https://img.freepik.com/fotos-premium/composicion-concepto-verdad-escritorio-detective_23-2149051329.jpg?semt=ais_hybrid" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Encuestas Seguras</h5>
+            <p>Crea y responde encuestas con total confianza, garantizando la privacidad de tus datos.</p>            
+        </div>
+    </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<br><br>
+<!-- About Section -->
+<section id="about" class="about section">
+    <div class="container">
+        <div class="row gy-4 align-items-center">
+            <!-- Imagen -->
+            <div class="col-lg-6 order-1 order-lg-2 d-flex justify-content-end" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://ni.scene7.com/is/image/ni/AdobeStock_534476686_895x636?scl=1" 
+                     width="480" 
+                     height="480"
+                     class="img-fluid rounded shadow-sm" 
+                     alt="Visualización de encuestas académicas">
+            </div>
+
+            <!-- Contenido -->
+            <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-4 border rounded shadow" style="background-color: #f8f9fa;">
+                    <h3 style="font-family: 'Poppins', sans-serif; font-size: 1.8rem; color: #343a40; font-weight: bold;">
+                        Descubre el Poder de la Investigación Académica
+                    </h3>
+                    <p class="fst-italic" style="font-family: 'Roboto', sans-serif; font-size: 1rem; color: #6c757d;">
+                        Nuestra app de encuestas está diseñada para optimizar la recopilación de datos y facilitar el análisis en proyectos académicos de cualquier nivel.
+                    </p>
+                    <ul style="padding-left: 1.2rem;">
+                        <li style="font-family: 'Roboto', sans-serif; font-size: 1rem; color: #495057; margin-bottom: 0.8rem;">
+                            <i class="bi bi-check-circle text-primary"></i> <span>Diseño intuitivo para crear encuestas en minutos.</span>
+                        </li>
+                        <li style="font-family: 'Roboto', sans-serif; font-size: 1rem; color: #495057; margin-bottom: 0.8rem;">
+                            <i class="bi bi-check-circle text-primary"></i> <span>Reportes detallados con gráficos interactivos para una mejor interpretación.</span>
+                        </li>
+                        <li style="font-family: 'Roboto', sans-serif; font-size: 1rem; color: #495057; margin-bottom: 0.8rem;">
+                            <i class="bi bi-check-circle text-primary"></i> <span>Seguridad garantizada para proteger tus datos y los de los participantes.</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="read-more btn btn-primary mt-3" 
+                       style="font-family: 'Roboto', sans-serif; font-size: 1rem; font-weight: 500;">
+                        <span>Explora más</span><i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br><br>
+<div class="container footer-top py-5" style="background-color: #282c34; color: #f8f9fa; border-top: 4px solid #007bff;">
+    <div class="row gy-4">
+      <!-- About Section -->
+      <div class="col-lg-4 col-md-6">
+        <h4 style="font-size: 1.8rem; font-weight: bold; color: #007bff; font-family: 'Montserrat', sans-serif;">Investigación Académica</h4>
+        <p class="mt-3" style="line-height: 1.8; font-size: 1.1rem; font-family: 'Lora', serif;">
+          Nuestra plataforma está diseñada para optimizar la recopilación de datos y facilitar el análisis en proyectos académicos, proporcionando herramientas seguras y eficientes para investigadores, docentes y estudiantes.
+        </p>
+        <div class="footer-contact mt-4">
+          <p><i class="bi bi-geo-alt-fill text-primary me-2"></i><strong>Dirección:</strong> Av. Felix Granja, Pasaje F</p>
+          <p><i class="bi bi-telephone-fill text-primary me-2"></i><strong>Teléfono:</strong> +593 968 641 468</p>
+          <p><i class="bi bi-envelope-fill text-primary me-2"></i><strong>Email:</strong> anthonyandrango769@gmail.com</p>
+        </div>
+      </div>
+  
+      <!-- Beneficios -->
+      <div class="col-lg-4 col-md-6">
+        <h4 style="font-size: 1.8rem; font-weight: bold; color: #007bff; font-family: 'Montserrat', sans-serif;">Beneficios Clave</h4>
+        <ul class="list-unstyled mt-3" style="line-height: 2; font-size: 1.1rem; font-family: 'Lora', serif;">
+          <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Diseña encuestas personalizadas fácilmente.</li>
+          <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Obtén análisis avanzados en tiempo real.</li>
+          <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Exporta resultados en múltiples formatos.</li>
+          <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Protege la privacidad de tus participantes.</li>
+          <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Compatible con dispositivos móviles y de escritorio.</li>
+        </ul>
+      </div>
+  
+      <!-- Cómo Funciona -->
+      <div class="col-lg-4 col-md-12">
+        <h4 style="font-size: 1.8rem; font-weight: bold; color: #007bff; font-family: 'Montserrat', sans-serif;">Cómo Funciona</h4>
+        <p class="mt-3" style="line-height: 1.8; font-size: 1.1rem; font-family: 'Lora', serif;">
+          Simplifica tus proyectos de investigación con nuestro flujo de trabajo intuitivo:
+        </p>
+        <ol class="mt-3 ps-3" style="line-height: 2; font-size: 1.1rem; font-family: 'Lora', serif;">
+          <li><strong>Paso 1:</strong> Diseña tu encuesta según los objetivos de tu proyecto.</li>
+          <li><strong>Paso 2:</strong> Comparte el enlace con tus participantes.</li>
+          <li><strong>Paso 3:</strong> Analiza los resultados con gráficos y estadísticas claras.</li>
+        </ol>
+      </div>
+    </div>
+  
+    <div class="row mt-5">
+      <div class="col text-center">
+        <p style="font-size: 0.9rem; color: #adb5bd; font-family: 'Lora', serif;">&copy; 2024 Investigación Académica. Todos los derechos reservados. :)</p>
+        <div class="social-links d-flex justify-content-center mt-3">
+          <a href="#" class="me-3 text-decoration-none" style="color: #007bff; font-size: 1.5rem;"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="me-3 text-decoration-none" style="color: #007bff; font-size: 1.5rem;"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="me-3 text-decoration-none" style="color: #007bff; font-size: 1.5rem;"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-decoration-none" style="color: #007bff; font-size: 1.5rem;"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+
+
+
+{% endblock %}
+

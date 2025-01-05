@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/guardarRespuesta/" id="frm_nueva_respuesta" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Agregar Nueva Respuesta</h3>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="select_estudiante" class="form-label"><b>Estudiante:</b></label>
+                <select class="form-control" name="select_estudiante" id="select_estudiante" required>
+                    <option value="" disabled selected>Selecciona un Estudiante</option>
+                    {% for estudiante in estudiantes %}
+                    <option value="{{ estudiante.id }}">{{ estudiante.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="select_pregunta" class="form-label"><b>Pregunta:</b></label>
+                <select class="form-control" name="select_pregunta" id="select_pregunta" required>
+                    <option value="" disabled selected>Selecciona una Pregunta</option>
+                    {% for pregunta in preguntas %}
+                    <option value="{{ pregunta.id }}">{{ pregunta.texto }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_texto_respuesta" class="form-label"><b>Texto de la Respuesta:</b></label>
+                <textarea class="form-control" name="txt_texto_respuesta" id="txt_texto_respuesta" rows="3" Placeholder="Ingrese la respuesta" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_respuesta" class="form-label"><b>Fecha de Respuesta:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_respuesta" id="txt_fecha_respuesta" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="/listadoRespuesta/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#frm_nueva_respuesta").validate({
+        rules: {
+            "select_estudiante": {
+                required: true
+            },
+            "select_pregunta": {
+                required: true
+            },
+            "txt_texto_respuesta": {
+                required: true,
+                minlength: 10
+            },
+            "txt_fecha_respuesta": {
+                required: true,
+                date: true
+            }
+        },
+        messages: {
+            "select_estudiante": {
+                required: "Por favor seleccione un estudiante"
+            },
+            "select_pregunta": {
+                required: "Por favor seleccione una pregunta"
+            },
+            "txt_texto_respuesta": {
+                required: "Por favor ingrese el texto de la respuesta",
+                minlength: "La respuesta debe tener al menos 10 caracteres"
+            },
+            "txt_fecha_respuesta": {
+                required: "Por favor ingrese la fecha de respuesta",
+                date: "Ingrese una fecha válida"
+            }
+        }
+    });
+</script>
+
+{% endblock %}

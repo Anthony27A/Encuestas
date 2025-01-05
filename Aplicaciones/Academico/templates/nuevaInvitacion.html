@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/guardarInvitacion/" id="frm_nueva_invitacion" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Agregar Nueva Invitación</h3>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="select_encuesta" class="form-label"><b>Encuesta:</b></label>
+                <select class="form-control" name="select_encuesta" id="select_encuesta" required>
+                    <option value="" disabled selected>Selecciona una Encuesta</option>
+                    {% for encuesta in encuestas %}
+                    <option value="{{ encuesta.id }}">{{ encuesta.titulo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="select_estudiante" class="form-label"><b>Estudiante:</b></label>
+                <select class="form-control" name="select_estudiante" id="select_estudiante" required>
+                    <option value="" disabled selected>Selecciona un Estudiante</option>
+                    {% for estudiante in estudiantes %}
+                    <option value="{{ estudiante.id }}">{{ estudiante.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_envio" class="form-label"><b>Fecha de Envío:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_envio" id="txt_fecha_envio" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_estado" class="form-label"><b>Estado:</b></label>
+                <input type="text" class="form-control" name="txt_estado" id="txt_estado" Placeholder="Ingrese el estado de la invitación" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="/listadoInvitacion/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#frm_nueva_invitacion").validate({
+        rules: {
+            "select_encuesta": {
+                required: true
+            },
+            "select_estudiante": {
+                required: true
+            },
+            "txt_fecha_envio": {
+                required: true,
+                date: true
+            },
+            "txt_estado": {
+                required: true,
+                minlength: 3
+            }
+        },
+        messages: {
+            "select_encuesta": {
+                required: "Por favor seleccione una encuesta"
+            },
+            "select_estudiante": {
+                required: "Por favor seleccione un estudiante"
+            },
+            "txt_fecha_envio": {
+                required: "Por favor ingrese la fecha de envío",
+                date: "Ingrese una fecha válida"
+            },
+            "txt_estado": {
+                required: "Por favor ingrese el estado de la invitación",
+                minlength: "El estado debe tener al menos 3 caracteres"
+            }
+        }
+    });
+</script>
+
+{% endblock %}

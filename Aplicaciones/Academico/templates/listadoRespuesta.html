@@ -1,0 +1,40 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<br><br>
+<h3 class="text-center mb-4">Listado de Respuestas</h3>
+<table class="table table-bordered table-striped table-hover" id="mitablaRespuestas">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Estudiante</th>
+            <th>Pregunta</th>
+            <th>Texto de la Respuesta</th>
+            <th>Fecha de Respuesta</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for respuesta in respuestas %}
+        <tr>
+            <td>{{ respuesta.id }}</td>
+            <td>{{ respuesta.estudiante.nombre }} {{ respuesta.estudiante.apellido }}</td>
+            <td>{{ respuesta.pregunta.texto }}</td>
+            <td>{{ respuesta.texto_respuesta }}</td>
+            <td>{{ respuesta.fecha_respuesta }}</td>
+            <td>
+                <a href="/editarRespuesta/{{ respuesta.id }}" class="btn btn-primary btn-sm">Editar</a>
+                <a onclick="return confirmDelete('{{ respuesta.id }}', 'respuesta');" href="#" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+        $('#mitablaRespuestas').DataTable();
+    });
+</script>
+
+{% endblock %}

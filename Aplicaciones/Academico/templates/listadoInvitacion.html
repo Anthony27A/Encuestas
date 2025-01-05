@@ -1,0 +1,40 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<br><br>
+<h3 class="text-center mb-4">Listado de Invitaciones</h3>
+<table class="table table-bordered table-striped table-hover" id="mitablaInvitaciones">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Encuesta</th>
+            <th>Estudiante</th>
+            <th>Fecha de Envío</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invitacion in invitaciones %}
+        <tr>
+            <td>{{ invitacion.id }}</td>
+            <td>{{ invitacion.encuesta.titulo }}</td>
+            <td>{{ invitacion.estudiante.nombre }}</td>
+            <td>{{ invitacion.fecha_envio }}</td>
+            <td>{{ invitacion.estado }}</td>
+            <td>
+                <a href="/editarInvitacion/{{ invitacion.id }}" class="btn btn-primary btn-sm">Editar</a>
+                <a onclick="return confirmDelete('{{ invitacion.id }}', 'invitacion');" href="#" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+        $('#mitablaInvitaciones').DataTable();
+    });
+</script>
+
+{% endblock %}

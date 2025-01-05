@@ -1,0 +1,40 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<br><br>
+<h3 class="text-center mb-4">Listado de Preguntas</h3>
+<table class="table table-bordered table-striped table-hover" id="mitablaPreguntas">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Texto</th>
+            <th>Tipo</th>
+            <th>Encuesta</th>
+            <th>Fecha de Creación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pregunta in preguntas %}
+        <tr>
+            <td>{{ pregunta.id }}</td>
+            <td>{{ pregunta.texto }}</td>
+            <td>{{ pregunta.tipo }}</td>
+            <td>{{ pregunta.encuesta.titulo }}</td>
+            <td>{{ pregunta.fecha_crea }}</td>
+            <td>
+                <a href="/editarPregunta/{{ pregunta.id }}" class="btn btn-primary btn-sm">Editar</a>
+                <a onclick="return confirmDelete('{{ pregunta.id }}', 'pregunta');" href="#" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+        $('#mitablaPreguntas').DataTable();
+    });
+</script>
+
+{% endblock %}

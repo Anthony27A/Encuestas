@@ -1,0 +1,91 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/guardarEncuesta/" id="frm_nueva_encuesta" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Agregar Nueva Encuesta</h3>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="txt_titulo" class="form-label"><b>Título:</b></label>
+                <input type="text" class="form-control" name="txt_titulo" id="txt_titulo" placeholder="Ingrese el título" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_descripcion" class="form-label"><b>Descripción:</b></label>
+                <input type="text" class="form-control" name="txt_descripcion" id="txt_descripcion" Placeholder="Ingrese una descripción" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_creacion" class="form-label"><b>Fecha de Creación:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_creacion" id="txt_fecha_creacion" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_expiracion" class="form-label"><b>Fecha de Expiración:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_expiracion" id="txt_fecha_expiracion" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_estado" class="form-label"><b>Estado:</b></label>
+                <input type="text" class="form-control" name="txt_estado" id="txt_estado" Placeholder="Ingrese el estado" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="/listadoEncuesta/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#frm_nueva_encuesta").validate({
+        rules: {
+            "txt_titulo": {
+                required: true,
+                minlength: 3
+            },
+            "txt_descripcion": {
+                required: true,
+                minlength: 5
+            },
+            "txt_fecha_creacion": {
+                required: true,
+                date: true
+            },
+            "txt_fecha_expiracion": {
+                required: true,
+                date: true
+            },
+            "txt_estado": {
+                required: true,
+                letters: true
+            }
+        },
+        messages: {
+            "txt_titulo": {
+                required: "Por favor ingrese el título de la encuesta",
+                minlength: "El título debe tener al menos 3 caracteres"
+            },
+            "txt_descripcion": {
+                required: "Por favor ingrese una descripción",
+                minlength: "La descripción debe tener al menos 5 caracteres"
+            },
+            "txt_fecha_creacion": {
+                required: "Por favor ingrese la fecha de creación",
+                date: "Ingrese una fecha válida"
+            },
+            "txt_fecha_expiracion": {
+                required: "Por favor ingrese la fecha de expiración",
+                date: "Ingrese una fecha válida"
+            },
+            "txt_estado": {
+                required: "Por favor ingrese el estado de la encuesta",
+                letters: "Solo se permiten letras"
+            }
+        }
+    });
+</script>
+
+{% endblock %}

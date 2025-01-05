@@ -1,0 +1,88 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/procesarEdicionRespuesta/" id="frm_editar_respuesta" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Editar Respuesta:</h3>
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ respuesta.id }}">
+
+            <div class="mb-3">
+                <label for="select_estudiante" class="form-label"><b>Estudiante:</b></label>
+                <select class="form-control" name="select_estudiante" id="select_estudiante" required>
+                    <option value="" disabled>Selecciona un Estudiante</option>
+                    {% for estudiante in estudiantes %}
+                    <option value="{{ estudiante.id }}" {% if estudiante.id == respuesta.estudiante.id %}selected{% endif %}>{{ estudiante.nombre }} {{ estudiante.apellido }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="select_pregunta" class="form-label"><b>Pregunta:</b></label>
+                <select class="form-control" name="select_pregunta" id="select_pregunta" required>
+                    <option value="" disabled>Selecciona una Pregunta</option>
+                    {% for pregunta in preguntas %}
+                    <option value="{{ pregunta.id }}" {% if pregunta.id == respuesta.pregunta.id %}selected{% endif %}>{{ pregunta.texto }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_texto_respuesta" class="form-label"><b>Texto de la Respuesta:</b></label>
+                <textarea class="form-control" name="txt_texto_respuesta" id="txt_texto_respuesta" rows="3" required>{{ respuesta.texto_respuesta }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_respuesta" class="form-label"><b>Fecha de Respuesta:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_respuesta" id="txt_fecha_respuesta" value="{{ respuesta.fecha_respuesta|date:'Y-m-d' }}" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-warning">Editar</button>
+                <a href="/listadoRespuesta/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#frm_editar_respuesta").validate({
+            rules: {
+                "select_estudiante": {
+                    required: true
+                },
+                "select_pregunta": {
+                    required: true
+                },
+                "txt_texto_respuesta": {
+                    required: true,
+                    minlength: 5
+                },
+                "txt_fecha_respuesta": {
+                    required: true,
+                    date: true
+                }
+            },
+            messages: {
+                "select_estudiante": {
+                    required: "Por favor, selecciona un estudiante."
+                },
+                "select_pregunta": {
+                    required: "Por favor, selecciona una pregunta."
+                },
+                "txt_texto_respuesta": {
+                    required: "Por favor, ingresa el texto de la respuesta.",
+                    minlength: "El texto de la respuesta debe tener al menos 5 caracteres."
+                },
+                "txt_fecha_respuesta": {
+                    required: "Por favor, ingresa la fecha de la respuesta.",
+                    date: "Por favor, ingresa una fecha válida."
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

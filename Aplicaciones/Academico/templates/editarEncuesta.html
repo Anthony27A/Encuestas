@@ -1,0 +1,95 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/procesarEdicionEncuesta/" id="frm_editar_encuesta" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Editar Encuesta</h3>
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ encuesta.id }}">
+
+            <div class="mb-3">
+                <label for="txt_titulo" class="form-label"><b>Título:</b></label>
+                <input type="text" class="form-control" name="txt_titulo" id="txt_titulo" value="{{ encuesta.titulo }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_descripcion" class="form-label"><b>Descripción:</b></label>
+                <input type="text" class="form-control" name="txt_descripcion" id="txt_descripcion" value="{{ encuesta.descripcion }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_creacion" class="form-label"><b>Fecha de Creación:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_creacion" id="txt_fecha_creacion" value="{{ encuesta.fecha_creacion|date:'Y-m-d' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_expiracion" class="form-label"><b>Fecha de Expiración:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_expiracion" id="txt_fecha_expiracion" value="{{ encuesta.fecha_expiracion|date:'Y-m-d' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_estado" class="form-label"><b>Estado:</b></label>
+                <input type="text" class="form-control" name="txt_estado" id="txt_estado" value="{{ encuesta.estado }}" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-warning">Editar</button>
+                <a href="/listadoEncuesta/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#frm_editar_encuesta").validate({
+            rules: {
+                "txt_titulo": {
+                    required: true,
+                    minlength: 2
+                },
+                "txt_descripcion": {
+                    required: true,
+                    minlength: 5
+                },
+                "txt_fecha_creacion": {
+                    required: true,
+                    date: true
+                },
+                "txt_fecha_expiracion": {
+                    required: true,
+                    date: true
+                },
+                "txt_estado": {
+                    required: true,
+                    minlength: 2
+                }
+            },
+            messages: {
+                "txt_titulo": {
+                    required: "Por favor, ingrese el título de la encuesta.",
+                    minlength: "El título debe tener al menos 2 caracteres."
+                },
+                "txt_descripcion": {
+                    required: "Por favor, ingrese una descripción de la encuesta.",
+                    minlength: "La descripción debe tener al menos 5 caracteres."
+                },
+                "txt_fecha_creacion": {
+                    required: "Por favor, seleccione la fecha de creación.",
+                    date: "Por favor, ingrese una fecha válida."
+                },
+                "txt_fecha_expiracion": {
+                    required: "Por favor, seleccione la fecha de expiración.",
+                    date: "Por favor, ingrese una fecha válida."
+                },
+                "txt_estado": {
+                    required: "Por favor, ingrese el estado de la encuesta.",
+                    minlength: "El estado debe tener al menos 2 caracteres."
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

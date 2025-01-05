@@ -1,0 +1,78 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/guardarEstudiante/" id="frm_nuevo_estudiante" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Agregar Nuevo Estudiante</h3>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="txt_nombre" class="form-label"><b>Nombre:</b></label>
+                <input type="text" class="form-control" name="txt_nombre" id="txt_nombre" Placeholder="Ingrese el nombre" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_correo" class="form-label"><b>Correo:</b></label>
+                <input type="email" class="form-control" name="txt_correo" id="txt_correo" Placeholder="Ingrese el correo electrónico" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_matricula" class="form-label"><b>Matrícula:</b></label>
+                <input type="text" class="form-control" name="txt_matricula" id="txt_matricula"  Placeholder="Ingrese la matrícula" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_registro" class="form-label"><b>Fecha de Registro:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_registro" id="txt_fecha_registro" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="/listadoEstudiantes/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#frm_nuevo_estudiante").validate({
+        rules: {
+            "txt_nombre": {
+                required: true,
+                minlength: 3
+            },
+            "txt_correo": {
+                required: true,
+                email: true
+            },
+            "txt_matricula": {
+                required: true,
+                minlength: 6
+            },
+            "txt_fecha_registro": {
+                required: true,
+                date: true
+            }
+        },
+        messages: {
+            "txt_nombre": {
+                required: "Por favor ingrese el nombre del estudiante",
+                minlength: "El nombre debe tener al menos 3 caracteres"
+            },
+            "txt_correo": {
+                required: "Por favor ingrese el correo del estudiante",
+                email: "Por favor ingrese un correo electrónico válido"
+            },
+            "txt_matricula": {
+                required: "Por favor ingrese la matrícula",
+                minlength: "La matrícula debe tener al menos 6 caracteres"
+            },
+            "txt_fecha_registro": {
+                required: "Por favor ingrese la fecha de registro",
+                date: "Ingrese una fecha válida"
+            }
+        }
+    });
+</script>
+
+{% endblock %}

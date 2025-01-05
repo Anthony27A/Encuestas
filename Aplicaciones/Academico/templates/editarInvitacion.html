@@ -1,0 +1,88 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/procesarEdicionInvitacion/" id="frm_editar_invitacion" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Editar Invitación:</h3>
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ invitacion.id }}">
+
+            <div class="mb-3">
+                <label for="select_encuesta" class="form-label"><b>Encuesta:</b></label>
+                <select class="form-control" name="select_encuesta" id="select_encuesta" required>
+                    <option value="" disabled>Selecciona una Encuesta</option>
+                    {% for encuesta in encuestas %}
+                    <option value="{{ encuesta.id }}" {% if encuesta.id == invitacion.encuesta.id %}selected{% endif %}>{{ encuesta.titulo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="select_estudiante" class="form-label"><b>Estudiante:</b></label>
+                <select class="form-control" name="select_estudiante" id="select_estudiante" required>
+                    <option value="" disabled>Selecciona un Estudiante</option>
+                    {% for estudiante in estudiantes %}
+                    <option value="{{ estudiante.id }}" {% if estudiante.id == invitacion.estudiante.id %}selected{% endif %}>{{ estudiante.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_envio" class="form-label"><b>Fecha de Envío:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_envio" id="txt_fecha_envio" value="{{ invitacion.fecha_envio|date:'Y-m-d' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_estado" class="form-label"><b>Estado:</b></label>
+                <input type="text" class="form-control" name="txt_estado" id="txt_estado" value="{{ invitacion.estado }}" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-warning">Editar</button>
+                <a href="/listadoInvitacion/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#frm_editar_invitacion").validate({
+            rules: {
+                "select_encuesta": {
+                    required: true
+                },
+                "select_estudiante": {
+                    required: true
+                },
+                "txt_fecha_envio": {
+                    required: true,
+                    date: true
+                },
+                "txt_estado": {
+                    required: true,
+                    minlength: 3
+                }
+            },
+            messages: {
+                "select_encuesta": {
+                    required: "Por favor, selecciona una encuesta."
+                },
+                "select_estudiante": {
+                    required: "Por favor, selecciona un estudiante."
+                },
+                "txt_fecha_envio": {
+                    required: "Por favor, ingresa la fecha de envío.",
+                    date: "Por favor, ingresa una fecha válida."
+                },
+                "txt_estado": {
+                    required: "Por favor, ingresa el estado de la invitación.",
+                    minlength: "El estado debe tener al menos 3 caracteres."
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="/procesarEdicionPregunta/" id="frm_editar_pregunta" method="post" class="p-4 border rounded bg-light">
+            <h3 class="text-center mb-4">Editar Pregunta:</h3>
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ pregunta.id }}">
+
+            <div class="mb-3">
+                <label for="txt_texto" class="form-label"><b>Texto de la Pregunta:</b></label>
+                <textarea class="form-control" name="txt_texto" id="txt_texto" rows="3" required>{{ pregunta.texto }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_tipo" class="form-label"><b>Tipo de Pregunta:</b></label>
+                <input type="text" class="form-control" name="txt_tipo" id="txt_tipo" value="{{ pregunta.tipo }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="select_encuesta" class="form-label"><b>Encuesta:</b></label>
+                <select class="form-control" name="select_encuesta" id="select_encuesta" required>
+                    <option value="" disabled>Selecciona una Encuesta</option>
+                    {% for encuesta in encuestas %}
+                    <option value="{{ encuesta.id }}" {% if encuesta.id == pregunta.encuesta.id %}selected{% endif %}>{{ encuesta.titulo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="txt_fecha_crea" class="form-label"><b>Fecha de Creación:</b></label>
+                <input type="date" class="form-control" name="txt_fecha_crea" id="txt_fecha_crea" value="{{ pregunta.fecha_crea|date:'Y-m-d' }}" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-warning">Editar</button>
+                <a href="/listadoPregunta/" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#frm_editar_pregunta").validate({
+            rules: {
+                "txt_texto": {
+                    required: true,
+                    minlength: 5
+                },
+                "txt_tipo": {
+                    required: true,
+                    minlength: 3
+                },
+                "select_encuesta": {
+                    required: true
+                },
+                "txt_fecha_crea": {
+                    required: true,
+                    date: true
+                }
+            },
+            messages: {
+                "txt_texto": {
+                    required: "Por favor, ingresa el texto de la pregunta.",
+                    minlength: "El texto de la pregunta debe tener al menos 5 caracteres."
+                },
+                "txt_tipo": {
+                    required: "Por favor, ingresa el tipo de la pregunta.",
+                    minlength: "El tipo de pregunta debe tener al menos 3 caracteres."
+                },
+                "select_encuesta": {
+                    required: "Por favor, selecciona una encuesta."
+                },
+                "txt_fecha_crea": {
+                    required: "Por favor, ingresa la fecha de creación.",
+                    date: "Por favor, ingresa una fecha válida."
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}
